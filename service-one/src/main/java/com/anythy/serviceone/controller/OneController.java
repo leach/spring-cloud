@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RestController;
  * @author leach
  */
 @RestController
-@RequestMapping("test")
+@RequestMapping("index")
 public class OneController {
 
-    @RequestMapping("i")
+    @RequestMapping("test")
     public String test(){
         return "test/one";
     }

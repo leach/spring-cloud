@@ -16,6 +16,7 @@
     <module>eureka</module>
     <module>service-one</module>
     <module>zuul</module>
+      <module>tools</module>
   </modules>
 
 

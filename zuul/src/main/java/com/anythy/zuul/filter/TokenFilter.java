@@ -13,19 +13,31 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Slf4j
 public class TokenFilter extends ZuulFilter {
+    /**
+     * 在请求被路由之前调用
+     * @return
+     */
     @Override
     public String filterType() {
-        return null;
+        return "pre";
     }
 
+    /**
+     * filter执行顺序，通过数字指定 ,优先级为0，数字越大，优先级越低
+     * @return
+     */
     @Override
     public int filterOrder() {
         return 0;
     }
 
+    /**
+     * 是否执行该过滤器，此处为true，说明需要过滤
+     * @return
+     */
     @Override
     public boolean shouldFilter() {
-        return false;
+        return true;
     }
 
     @Override
