@@ -16,7 +16,8 @@
     <module>eureka</module>
     <module>service-one</module>
     <module>zuul</module>
-      <module>tools</module>
+    <module>tools</module>
+    <module>common-spring-cloud</module>
   </modules>
 
 
