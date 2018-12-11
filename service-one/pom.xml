@@ -23,7 +23,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <spring-cloud.version>Finchley.SR1</spring-cloud.version>
-        <common.spring.cloud>1.0-SNAPSHOT</common.spring.cloud>
+        <base.spring.cloud.version>1.0</base.spring.cloud.version>
     </properties>
 
     <dependencies>
@@ -54,8 +54,13 @@
         </dependency>
         <dependency>
             <groupId>com.anythy</groupId>
-            <artifactId>common-spring-context</artifactId>
-            <version>${common.spring.cloud}</version>
+            <artifactId>base-spring-context</artifactId>
+            <version>${base.spring.cloud.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.anythy</groupId>
+            <artifactId>base-spring-cloud</artifactId>
+            <version>${base.spring.cloud.version}</version>
         </dependency>
     </dependencies>
 

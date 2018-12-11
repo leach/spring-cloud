@@ -10,4 +10,5 @@ import org.springframework.context.annotation.Import;
 @Configuration
 @Import(DemoService.class)
 public class BaseConfig {
+
 }

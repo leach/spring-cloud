@@ -3,17 +3,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>common-spring-cloud</artifactId>
+        <artifactId>base-spring</artifactId>
         <groupId>com.anythy</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.anythy</groupId>
-    <artifactId>common-spring-context</artifactId>
-    <version>${project.version}</version>
+    <artifactId>base-spring-context</artifactId>
 
-    <name>context</name>
+    <name>base-spring-context</name>
 
     <dependencies>
         <dependency>

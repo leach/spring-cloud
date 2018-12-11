@@ -1,4 +1,4 @@
-package com.anythy.utils;
+package com.anythy.base.spring.context;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
@@ -23,11 +23,11 @@ import java.util.Map;
 public class SpringContextUtils implements ApplicationContextAware {
 
     private static ApplicationContext context;
-    private static boolean started=false;
+    private static boolean started = false;
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        SpringContextUtils.context=applicationContext;
+        SpringContextUtils.context = applicationContext;
         started = true;
     }
 
@@ -83,16 +83,16 @@ public class SpringContextUtils implements ApplicationContextAware {
         return context.getBeanNamesForType(type, includeNonSingletons, allowEagerInit);
     }
 
-    public static <T> Map<String,T> getBeansOfType(Class<T> type) throws BeansException {
-        try{
+    public static <T> Map<String, T> getBeansOfType(Class<T> type) throws BeansException {
+        try {
             return context.getBeansOfType(type);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public static <T> Map<String,T> getBeansOfType(Class<T> type, boolean includeNonSingletons, boolean allowEagerInit) throws BeansException {
+    public static <T> Map<String, T> getBeansOfType(Class<T> type, boolean includeNonSingletons, boolean allowEagerInit) throws BeansException {
         return context.getBeansOfType(type, includeNonSingletons, allowEagerInit);
     }
 
@@ -176,11 +176,11 @@ public class SpringContextUtils implements ApplicationContextAware {
         return context.getResource(location);
     }
 
-    public static ApplicationContext getContext(){
+    public static ApplicationContext getContext() {
         return context;
     }
 
-    public static boolean isAvailable(){
+    public static boolean isAvailable() {
         return started && null != context;
     }
 
