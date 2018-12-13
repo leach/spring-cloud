@@ -17,6 +17,7 @@
     <modules>
         <module>base-spring-context</module>
         <module>base-spring-cloud</module>
+        <module>base-common</module>
     </modules>
 
     <properties>

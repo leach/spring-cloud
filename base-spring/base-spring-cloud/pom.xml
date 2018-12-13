@@ -15,10 +15,20 @@
 
 
     <dependencies>
+        <!-- base-common -->
+        <dependency>
+            <groupId>com.anythy</groupId>
+            <artifactId>base-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <!-- spring-boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
         </dependency>
 
         <!-- spring-context -->
@@ -27,10 +37,11 @@
             <artifactId>base-spring-context</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <!-- Spring-web -->
+
+        <!-- servlet-api -->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
         </dependency>
 
         <!-- swagger2 -->
