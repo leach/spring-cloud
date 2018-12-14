@@ -38,23 +38,8 @@ public class ApiVersionCondition implements RequestCondition<ApiVersionCondition
         Matcher matcher = VERSION_PREFIX_PATTERN.matcher(uri);
         if(matcher.find()){
             Integer version = Integer.valueOf(matcher.group(Numbers.FIRST));
-            if(version >= this.apiVersion){
+            if(version.intValue() == this.apiVersion){
                 return this;
-            }
-        }else {
-            /**
-             * 处理匹配{version}
-             */
-            try {
-                String version_placeholder = UrlUtil.encode(Versions.VERSION_PLACEHOLDER);
-                Pattern VERSION_PLACEHOLDER_PATTERN = Pattern.compile(version_placeholder);
-                Matcher matcherHolder = VERSION_PLACEHOLDER_PATTERN.matcher(uri);
-                if(matcherHolder.find()){
-                    this.apiVersion = Versions.MAX;
-                    return this;
-                }
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
             }
         }
         return null;

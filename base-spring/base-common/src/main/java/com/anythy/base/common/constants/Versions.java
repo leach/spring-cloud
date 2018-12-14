@@ -16,13 +16,8 @@ public class Versions {
     public static final int BASE = 1;
 
     /**
-     * 最大版本
-     */
-    public static final int MAX = 100;
-
-    /**
      * 版本URL匹配正则
      */
-    public static final String VERSION_PATTERN = "/v(\\d+).*";
+    public static final String VERSION_PATTERN = "/[vV](\\d+).*";
 
 }

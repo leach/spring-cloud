@@ -1,4 +1,4 @@
-package com.anythy.serviceone.controller;
+package com.anythy.base.demo;
 
 import com.anythy.base.spring.apiversion.annotation.ApiVersion;
 import io.swagger.annotations.Api;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @ApiVersion(1)
 @Api(value = "Version Demo controller", description = "版本控制接口测试")
 @RestController
-@RequestMapping("/{version}/versionDemo")
+@RequestMapping("/{version}/versiondemo")
 public class VersionDemoController {
 
     @ApiImplicitParam(name = "version", value = "版本号", required = true, defaultValue = "V1",dataType = "String", paramType = "path")
