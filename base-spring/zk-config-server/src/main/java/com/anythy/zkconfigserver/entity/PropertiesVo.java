@@ -1,9 +1,12 @@
 package com.anythy.zkconfigserver.entity;
 
+import com.anythy.base.common.base.BaseObjModel;
+
 /**
+ * PropertiesVo
  * @author Leach
  */
-public class Properties {
+public class PropertiesVo extends BaseObjModel {
     private String path;
     private String data;
 

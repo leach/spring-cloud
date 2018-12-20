@@ -1,10 +1,9 @@
 package com.anythy.zkconfigserver.util;
 
 import com.anythy.base.common.utils.JsonHelper;
-import com.anythy.zkconfigserver.entity.Properties;
+import com.anythy.zkconfigserver.entity.PropertiesVo;
 import org.apache.zookeeper.*;
 import org.apache.zookeeper.data.Stat;
-import org.apache.zookeeper.version.util.VerGen;
 
 import java.io.IOException;
 
@@ -19,14 +18,14 @@ public class ZookeeperUtil {
             });
 //            zk.create("/test", "ttttt".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
 
-            Properties properties = new Properties();
+            PropertiesVo properties = new PropertiesVo();
             properties.setData("测试数据");
             properties.setPath("ppppp");
 
             zk.setData("/test", JsonHelper.toJSON(properties).getBytes(), Version.REVISION);
             Stat stat = new Stat();
             byte[] bytes = zk.getData("/test", true, stat);
-            Properties p = new Properties();
+            PropertiesVo p = new PropertiesVo();
             zk.getData("/test", true, (v1, v2, v3, v4, v5) -> {
                 System.out.println(v1);
                 System.out.println(v2);
@@ -34,7 +33,7 @@ public class ZookeeperUtil {
                 System.out.println(v4);
                 System.out.println(v5);
             }, p);
-            p = JsonHelper.fromJSON(new String(bytes), Properties.class);
+            p = JsonHelper.fromJSON(new String(bytes), PropertiesVo.class);
             System.out.println(p);
             System.out.println(stat);
         } catch (IOException e) {
