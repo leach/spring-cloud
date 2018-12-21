@@ -1,5 +1,9 @@
 package com.anythy.base.common.base;
 
+import com.anythy.base.common.base.model.Base;
+import com.anythy.base.common.base.model.BaseListModel;
+import com.anythy.base.common.base.model.BaseObjModel;
+import com.anythy.base.common.base.BusinessException.Errors;
 import java.io.Serializable;
 import java.util.List;
 
@@ -23,7 +27,7 @@ public class CommonResult<T> implements Serializable {
         return new CommonResult(Base.ZERO, Base.EMPTY, null);
     }
     /**
-     * 返回数据
+     * 返回数据:成功
      * @param data
      * @param <M>
      * @return
@@ -48,6 +52,20 @@ public class CommonResult<T> implements Serializable {
         this.code = code;
         this.msg = msg;
         this.data = data;
+    }
+
+    /**
+     * 返回数据:失败
+     * @return
+     */
+    public static CommonResult<String> fail(Integer code, String message){
+        if(code == null || code == 0){
+            code = Errors.DEFAULT_ERROR.getCode();
+        }
+        return new CommonResult<>(code, message, null);
+    }
+    public static CommonResult<String> fail(String message){
+        return new CommonResult<>(Errors.DEFAULT_ERROR.getCode(), message, null);
     }
 
     public int getCode() {

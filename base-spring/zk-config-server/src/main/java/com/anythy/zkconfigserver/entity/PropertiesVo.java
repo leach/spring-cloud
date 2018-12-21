@@ -1,28 +1,64 @@
 package com.anythy.zkconfigserver.entity;
 
-import com.anythy.base.common.base.BaseObjModel;
+import com.anythy.base.common.base.model.BaseObjModel;
 
 /**
  * PropertiesVo
  * @author Leach
  */
 public class PropertiesVo extends BaseObjModel {
-    private String path;
-    private String data;
+    private Integer id;
+    private Integer profileId;
+    private String key;
+    private String value;
+    private String status;
+    private String remark;
 
-    public String getPath() {
-        return path;
+    public Integer getId() {
+        return id;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getData() {
-        return data;
+    public Integer getProfileId() {
+        return profileId;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setProfileId(Integer profileId) {
+        this.profileId = profileId;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

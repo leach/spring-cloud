@@ -19,8 +19,8 @@ public class ZookeeperUtil {
 //            zk.create("/test", "ttttt".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
 
             PropertiesVo properties = new PropertiesVo();
-            properties.setData("测试数据");
-            properties.setPath("ppppp");
+            properties.setKey("测试数据");
+            properties.setRemark("ppppp");
 
             zk.setData("/test", JsonHelper.toJSON(properties).getBytes(), Version.REVISION);
             Stat stat = new Stat();

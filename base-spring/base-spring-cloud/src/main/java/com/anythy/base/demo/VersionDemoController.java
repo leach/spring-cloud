@@ -1,6 +1,6 @@
 package com.anythy.base.demo;
 
-import com.anythy.base.spring.apiversion.annotation.ApiVersion;
+import com.anythy.base.configure.apiversion.annotation.ApiVersion;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import org.springframework.web.bind.annotation.GetMapping;

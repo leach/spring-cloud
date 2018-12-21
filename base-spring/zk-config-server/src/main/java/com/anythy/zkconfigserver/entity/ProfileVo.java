@@ -1,6 +1,6 @@
 package com.anythy.zkconfigserver.entity;
 
-import com.anythy.base.common.base.BaseObjModel;
+import com.anythy.base.common.base.model.BaseObjModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
@@ -13,7 +13,7 @@ public class ProfileVo extends BaseObjModel {
     @ApiModelProperty("项目")
     private String project;
     @ApiModelProperty("环境")
-    private String profile;
+    private String name;
     @ApiModelProperty("备注")
     private String remark;
 
@@ -33,12 +33,12 @@ public class ProfileVo extends BaseObjModel {
         this.project = project;
     }
 
-    public String getProfile() {
-        return profile;
+    public String getName() {
+        return name;
     }
 
-    public void setProfile(String profile) {
-        this.profile = profile;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getRemark() {

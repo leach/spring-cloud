@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="layui/css/layui.css" media="all">
+  <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+</head>
+
+<body>
+  <div style="padding: 10px;">
+    <div class="layui-row layui-col-space8">
+      <div class="layui-col-xs4">
+        <!-- 搜索框 -->
+        <div class="leftTableToolbar">
+          搜索项目：
+          <div class="layui-inline">
+            <input class="layui-input" name="project" id="leftTableReload" autocomplete="off">
+          </div>
+          <button class="layui-btn" data-type="reload">搜索</button>
+          <span class=""></span>
+          <button class="layui-btn layui-btn-normal" id="createNew">新增</button>
+        </div>
+        <!-- 左边项目环境列表-->
+        <table class="layui-table" lay-data="{height: 500, url:'http://localhost:8080/props/profile/list', page:false, id:'profileTable', parseData: baseUtil.parsedata, done: test}"
+          lay-filter="left-profile">
+          <thead>
+            <tr>
+              <th lay-data="{field: 'id', title: 'ID', width:40, sort: true, align: 'center', fixed: 'left'}"></th>
+              <th lay-data="{field: 'project', title: '项目', width:180}"></th>
+              <th lay-data="{field: 'profile', title: '环境', width:120, edit: 'text'}"></th>
+              <th lay-data="{field: 'remark', title: '备注', width:120, edit: 'text'}"></th>
+              <th lay-data="{fixed: 'right', title:'操作', toolbar: '#leftRowToolbar'}"></th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="layui-col-xs8">
+        <table id="propertiesTable" class="layui-table" lay-filter="right-properties">
+          <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- 工具栏 -->
+  <script type="text/html" id="leftRowToolbar">
+    <button class="layui-btn layui-btn-xs layui-btn-disabled" disabled=true lay-event="edit">更新</button>
+  <button class="layui-btn layui-btn-danger layui-btn-xs" lay-event="copy">复制</button>
+</script>
+
+  <script src="scripts/base.js" charset="utf-8"></script>
+  <script src="layui/layui.js" charset="utf-8"></script>
+  <script src="scripts/index.js" charset="utf-8"></script>
+  <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+  <script>
+    layui.use('table', function () {
+      var table = layui.table;
+
+      //右边表格
+      var propertiesTable = table.render({
+        elem: "#propertiesTable",
+        url: 'http://localhost:8080/props/profile/list', //数据接口
+        page: false, //开启分页
+        cols: [
+          [ //表头
+            {
+              field: 'id',
+              title: 'ID',
+              width: 40,
+              sort: true,
+              align: 'center',
+              fixed: 'left'
+            },
+            {
+              field: 'project',
+              title: '项目',
+              width: 120,
+              edit: 'text'
+            },
+            {
+              field: 'profile',
+              title: '环境',
+              width: 120,
+              edit: 'text'
+            },
+            {
+              field: 'remark',
+              title: '备注',
+              width: 120,
+              edit: 'text'
+            },
+            {
+              fixed: 'right',
+              title: '操作',
+              toolbar: '#rowToolbar',
+              width: 120
+            }
+          ]
+        ],
+        parseData: function (res) { //res 即为原始返回的数据
+          return {
+            "code": res.code, //解析接口状态
+            "msg": res.msg, //解析提示文本
+            "count": res.totalCount, //解析数据长度
+            "data": res.data.list //解析数据列表
+          };
+        }
+      });
+      //监听单元格编辑
+      table.on('edit(right-properties)', function (obj) {
+        var value = obj.value //得到修改后的值
+          ,
+          data = obj.data //得到所在行所有键值
+          ,
+          field = obj.field; //得到字段
+        layer.msg('[ID: ' + data.id + '] ' + field + ' 字段更改为：' + value);
+      });
+    });
+  </script>
+
+</body>
+
+</html>
