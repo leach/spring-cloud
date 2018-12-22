@@ -38,7 +38,7 @@ public interface PropsMapper {
      * @param name
      * @return
      */
-    @Select("SELECT id, project, name FROM profile WHERE project = #{project} and name = #{name}")
+    @Select("SELECT id, project, name FROM profile WHERE project = #{project} and name = #{name} order by id desc")
     ProfileVo getProfile(@Param("project") String project, @Param("name") String name);
 
     /**

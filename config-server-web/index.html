@@ -26,22 +26,12 @@
           <button class="layui-btn layui-btn-normal" id="createNew">新增</button>
         </div>
         <!-- 左边项目环境列表-->
-        <table class="layui-table" lay-data="{height: 500, url:'http://localhost:8080/props/profile/list', page:false, id:'profileTable', parseData: baseUtil.parsedata, done: test}"
-          lay-filter="left-profile">
-          <thead>
-            <tr>
-              <th lay-data="{field: 'id', title: 'ID', width:40, sort: true, align: 'center', fixed: 'left'}"></th>
-              <th lay-data="{field: 'project', title: '项目', width:180}"></th>
-              <th lay-data="{field: 'profile', title: '环境', width:120, edit: 'text'}"></th>
-              <th lay-data="{field: 'remark', title: '备注', width:120, edit: 'text'}"></th>
-              <th lay-data="{fixed: 'right', title:'操作', toolbar: '#leftRowToolbar'}"></th>
-            </tr>
-          </thead>
+        <table id="profileTable" class="layui-table" lay-filter="profileTableFilter">
         </table>
       </div>
       <div class="layui-col-xs8">
         <table id="propertiesTable" class="layui-table" lay-filter="right-properties">
-          <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
+          <!-- <th lay-data="{type:'checkbox', fixed: 'left'}"></th> -->
         </table>
       </div>
     </div>
@@ -51,16 +41,21 @@
 
   <!-- 工具栏 -->
   <script type="text/html" id="leftRowToolbar">
+  {{# if(d.id == -1){ }}
+    <button class="layui-btn layui-btn-xs" lay-event="save">保存</button>
+  {{# } else { }}
     <button class="layui-btn layui-btn-xs layui-btn-disabled" disabled=true lay-event="edit">更新</button>
-  <button class="layui-btn layui-btn-danger layui-btn-xs" lay-event="copy">复制</button>
-</script>
+    <button class="layui-btn layui-btn-danger layui-btn-xs" lay-event="copy">复制</button>
+  {{# } }}
+  </script>
 
   <script src="scripts/base.js" charset="utf-8"></script>
+  <script src="scripts/api.js" charset="utf-8"></script>
   <script src="layui/layui.js" charset="utf-8"></script>
   <script src="scripts/index.js" charset="utf-8"></script>
   <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
   <script>
-    layui.use('table', function () {
+    layui.use(['jquery', 'laydate', 'util', 'layer', 'table', 'form'], function ($, laydate, util, layer, table, form) {
       var table = layui.table;
 
       //右边表格
@@ -121,6 +116,18 @@
           ,
           field = obj.field; //得到字段
         layer.msg('[ID: ' + data.id + '] ' + field + ' 字段更改为：' + value);
+      });
+      // 新增一条记录
+      $('#createNew').click(function () {
+        var tableObj = propertiesTable;
+        var config = tableObj.config;
+        var dataTemp = table.cache.propertiesTable;
+        dataTemp.push({
+          id: 'new' + new Date().getTime()
+        });
+        propertiesTable = table.reload(config.id, {
+          data: dataTemp
+        });
       });
     });
   </script>

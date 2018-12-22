@@ -1,36 +1,74 @@
-layui.use('table', function () {
-    var $ = layui.$;
+layui.use(['jquery', 'laydate', 'util', 'layer', 'table', 'form'], function ($, laydate, util, layer, table, form) {
     var table = layui.table;
-    //搜索
-    var active = {
-        reload: function () {
-            var leftTableReload = $('#leftTableReload');
-            var project = leftTableReload.val();
-            //执行重载
-            table.reload('profileTable', {
-                where: {
-                    project: project
+    //处理profile数据-start
+    var renderProfile = function (data) {
+        $.get({
+            url: 'http://localhost:8080/props/profile/list',
+            data: data,
+            success: function (data) {
+                var parse = baseUtil.parsedata(data);
+                var profileConfig = {
+                    elem: '#profileTable',
+                    height: 500,
+                    limit: 10,
+                    page: false,
+                    cols: [
+                        [{
+                                field: 'id',
+                                title: 'ID',
+                                width: 40,
+                                sort: true,
+                                align: 'center',
+                                fixed: 'left'
+                            },
+                            {
+                                field: 'project',
+                                title: '项目',
+                                width: 180,
+                                edit: 'text'
+                            },
+                            {
+                                field: 'name',
+                                title: '环境',
+                                width: 120,
+                                edit: 'text'
+                            },
+                            {
+                                field: 'remark',
+                                title: '备注',
+                                width: 120,
+                                edit: 'text'
+                            },
+                            {
+                                fixed: 'right',
+                                title: '操作',
+                                toolbar: '#leftRowToolbar'
+                            },
+                        ]
+                    ],
+                    data: parse.data,
+                    page: true,
+                    limits: [5, 7, 10],
+                    done: test
                 }
-            });
-        }
-    };
-    $('.leftTableSearch .layui-btn').on('click', function () {
-        var type = $(this).data('type');
-        active[type] ? active[type].call(this) : '';
+                table.render(profileConfig);
+            }
+        });
+    }
+    renderProfile();
+    // 新增一条记录
+    $('#createNew').click(function () {
+        var tableId = 'profileTable';
+        var datas = table.cache[tableId];
+        datas.push({
+            id: -1
+        });
+        table.reload(tableId, {
+            data: datas
+        });
     });
-    //监听左侧单元格编辑
-    table.on('edit(left-profile)', function (obj) {
-        obj.tr.find('[lay-event="edit"]').removeClass('layui-btn-disabled').removeAttr('disabled');
-        var value = obj.value //得到修改后的值
-            ,
-            data = obj.data //得到所在行所有键值
-            ,
-            field = obj.field; //得到字段
-        layer.msg('[ID: ' + data.id + '] ' + field + ' 字段更改为：' + value);
-    });
-
     //监听行工具事件
-    table.on('tool(left-profile)', function (obj) {
+    table.on('tool(profileTableFilter)', function (obj) {
         var data = obj.data;
         //console.log(obj)
         if (obj.event === 'copy') {
@@ -48,6 +86,42 @@ layui.use('table', function () {
                 });
                 layer.close(index);
             });
+        } else if (obj.event === 'save') {
+            //保存记录
+            baseUtil.postJson($, api.url.saveprofile, data, function (res) {
+                if (res.data) {
+                    layer.msg('保存成功');
+                    var tableId = 'profileTable';
+                    var datas = table.cache[tableId];
+                    var lastData = datas.pop();
+                    lastData.id = res.data.id;
+                    datas.push(lastData);
+                    profileTable = table.reload(tableId, {
+                        data: datas
+                    });
+                }
+            });
         }
     });
+    //搜索框
+    var active = {
+        reload: function () {
+            var leftTableReload = $('#leftTableReload');
+            var project = leftTableReload.val();
+            //执行重载
+            renderProfile({
+                project: project
+            });
+
+        }
+    };
+    $('.leftTableToolbar .layui-btn').on('click', function () {
+        var type = $(this).data('type');
+        active[type] ? active[type].call(this) : '';
+    });
+    //处理profile数据-end
 });
+
+test = function () {
+    //debugger;
+}
