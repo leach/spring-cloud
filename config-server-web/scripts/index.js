@@ -24,7 +24,7 @@ layui.use(['jquery', 'laydate', 'util', 'layer', 'table', 'form'], function ($, 
                             {
                                 field: 'project',
                                 title: '项目',
-                                width: 180,
+                                width: 160,
                                 edit: 'text'
                             },
                             {
@@ -36,7 +36,7 @@ layui.use(['jquery', 'laydate', 'util', 'layer', 'table', 'form'], function ($, 
                             {
                                 field: 'remark',
                                 title: '备注',
-                                width: 120,
+                                width: 140,
                                 edit: 'text'
                             },
                             {
@@ -48,8 +48,7 @@ layui.use(['jquery', 'laydate', 'util', 'layer', 'table', 'form'], function ($, 
                     ],
                     data: parse.data,
                     page: true,
-                    limits: [5, 7, 10],
-                    done: test
+                    limits: [5, 7, 10]
                 }
                 table.render(profileConfig);
             }
@@ -120,8 +119,61 @@ layui.use(['jquery', 'laydate', 'util', 'layer', 'table', 'form'], function ($, 
         active[type] ? active[type].call(this) : '';
     });
     //处理profile数据-end
-});
 
-test = function () {
-    //debugger;
-}
+    //处理properties数据-start
+    var renderProperties = function (data) {
+        $.get({
+            url: 'http://localhost:8080/props/properties/list',
+            data: data,
+            success: function (data) {
+                var parse = baseUtil.parsedata(data);
+                var profileConfig = {
+                    elem: '#propertiesTable',
+                    height: 500,
+                    limit: 10,
+                    page: false,
+                    cols: [
+                        [{
+                            field: 'id',
+                            title: 'ID',
+                            width: 40,
+                            sort: true,
+                            align: 'center',
+                            fixed: 'left'
+                        },
+                            {
+                                field: 'project',
+                                title: '项目',
+                                width: 160,
+                                edit: 'text'
+                            },
+                            {
+                                field: 'name',
+                                title: '环境',
+                                width: 120,
+                                edit: 'text'
+                            },
+                            {
+                                field: 'remark',
+                                title: '备注',
+                                width: 140,
+                                edit: 'text'
+                            },
+                            {
+                                fixed: 'right',
+                                title: '操作',
+                                toolbar: '#leftRowToolbar'
+                            },
+                        ]
+                    ],
+                    data: parse.data,
+                    page: true,
+                    limits: [5, 7, 10],
+                    done: test
+                }
+                table.render(profileConfig);
+            }
+        });
+    }
+    renderProfile();
+});

@@ -14,7 +14,7 @@
 <body>
   <div style="padding: 10px;">
     <div class="layui-row layui-col-space8">
-      <div class="layui-col-xs4">
+      <div class="layui-col-xs6">
         <!-- 搜索框 -->
         <div class="leftTableToolbar">
           搜索项目：
@@ -29,7 +29,17 @@
         <table id="profileTable" class="layui-table" lay-filter="profileTableFilter">
         </table>
       </div>
-      <div class="layui-col-xs8">
+      <div class="layui-col-xs6">
+          <!-- 搜索框 -->
+          <div class="leftTableToolbar">
+              搜索项目：
+              <div class="layui-inline">
+                  <input class="layui-input" name="project" id="rightTableReload" autocomplete="off">
+              </div>
+              <button class="layui-btn" data-type="reload">搜索</button>
+              <span class=""></span>
+              <button class="layui-btn layui-btn-normal" id="createProperties">新增</button>
+          </div>
         <table id="propertiesTable" class="layui-table" lay-filter="right-properties">
           <!-- <th lay-data="{type:'checkbox', fixed: 'left'}"></th> -->
         </table>
@@ -99,14 +109,7 @@
             }
           ]
         ],
-        parseData: function (res) { //res 即为原始返回的数据
-          return {
-            "code": res.code, //解析接口状态
-            "msg": res.msg, //解析提示文本
-            "count": res.totalCount, //解析数据长度
-            "data": res.data.list //解析数据列表
-          };
-        }
+        parseData: baseUtil.parsedata
       });
       //监听单元格编辑
       table.on('edit(right-properties)', function (obj) {
