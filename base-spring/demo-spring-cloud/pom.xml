@@ -4,9 +4,8 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.anythy</groupId>
-        <artifactId>base-spring-cloud</artifactId>
+        <artifactId>base-spring</artifactId>
         <version>1.0</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.anythy</groupId>
     <artifactId>demo-spring-cloud</artifactId>
@@ -49,6 +48,17 @@
             <artifactId>base-spring-context</artifactId>
             <version>1.0</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>${java-jwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>mvc-auth-commons</artifactId>
+            <version>${mvc-auth-commons.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
