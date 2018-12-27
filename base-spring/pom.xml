@@ -38,6 +38,7 @@
         <jackson.classmate.version>1.3.3</jackson.classmate.version>
         <java-jwt.version>3.4.1</java-jwt.version>
         <mvc-auth-commons.version>1.0.2</mvc-auth-commons.version>
+        <lombok.version>1.18.2</lombok.version>
     </properties>
 
     <dependencyManagement>
