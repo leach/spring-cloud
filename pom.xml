@@ -18,6 +18,7 @@
       <module>zuul</module>
       <module>tools</module>
       <module>base-spring</module>
+      <module>base-service</module>
   </modules>
 
 
